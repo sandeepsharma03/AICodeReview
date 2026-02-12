@@ -128,7 +128,8 @@ class AICodeReviewer:
             # Check for errors
             if result.returncode != 0:
                 print(f"    ⚠️  Copilot CLI error (exit code {result.returncode})")
-                print(f"    ⚠️  Copilot CLI error message ( {result})")
+                print(f"    ⚠️  Copilot CLI error (exit message {result.stderr})")
+                print(f"    ⚠️  Copilot CLI error (exit output {result.stdout})")
                 if result.stderr:
                     # Sanitize error message - avoid printing full errors that may contain tokens/paths
                     stderr_preview = result.stderr[:100].split('\n')[0]  # Only first line, truncated
