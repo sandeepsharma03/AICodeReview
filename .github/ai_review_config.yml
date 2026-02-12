@@ -1,0 +1,94 @@
+review_settings:
+  enabled: true
+  
+  # File patterns to include/exclude from review
+  file_patterns:
+    include:
+      - "src/**/*.java"
+      - "src/**/*.py"
+      - "*.xml"
+      - ".github/workflows/*.yml"
+      - "*.properties"
+      - ".github/scripts/*.py"
+    exclude:
+      - "test/**"
+      - "mongo/**"
+      - "clickyreport/**"
+      - "bom.txt"
+      - "pom*.xml"
+  
+  # Aspects to review
+  review_aspects:
+    - security
+    - performance
+    - code_quality
+    - best_practices
+    - maintainability
+  
+  # Severity thresholds
+  severity_thresholds:
+    block_merge_on: critical
+    require_attention_on: error
+  
+  # Review limits
+  max_files_per_review: 25
+  max_lines_per_file: 800
+  max_total_lines: 4000
+  
+  # Language-specific settings
+  languages:
+    java:
+      focus_areas:
+        - resource_management
+        - exception_handling
+        - null_safety
+        - dependency_injection
+        - servlet_security
+    
+    python:
+      focus_areas:
+        - error_handling
+        - type_hints
+        - pep8_compliance
+    
+    yaml:
+      focus_areas:
+        - security_secrets
+        - workflow_efficiency
+  
+  # Review prompt templates
+  prompts:
+    general: |
+      Review this code change as an experienced software engineer.
+      Identify issues in: security, performance, code quality, best practices.
+      Provide specific, actionable feedback with examples.
+    
+    security: |
+      Focus on security vulnerabilities: SQL injection, XSS, insecure data handling,
+      authentication issues, authorization bypass, sensitive data exposure.
+    
+    java_specific: |
+      Review Java code for: proper resource management (try-with-resources),
+      exception handling, null safety, thread safety, servlet security,
+      dependency injection patterns.
+
+# Comment formatting
+comment_settings:
+  include_severity_emoji: true
+  include_suggestions: true
+  include_code_examples: true
+  max_comment_length: 2000
+  
+  severity_emojis:
+    critical: "🚨"
+    error: "❌"
+    warning: "⚠️"
+    info: "💡"
+    suggestion: "✨"
+
+# Integration settings
+integration:
+  post_review_summary: true
+  create_review_thread: false
+  update_pr_status: false
+  notify_codeowners: false
