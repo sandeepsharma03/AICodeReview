@@ -54,7 +54,7 @@ jobs:
       
       - name: Run AI Code Review
         env:
-          GHE_TOKEN: ${{ secrets.GITHUB_PAT_TOKEN }}
+          GHE_TOKEN: ${{ secrets.GIT_PAT_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.COPILOT_TOKEN_PAT }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
           REPO_OWNER: ${{ github.repository_owner }}
