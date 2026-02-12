@@ -50,7 +50,7 @@ class GitHubClient:
         self.repo_owner = repo_owner
         self.repo_name = repo_name
         # Allow API base URL to be configurable via environment or parameter
-        self.api_base_url = api_base_url or os.environ.get("GITHUB_API_URL", "https://ghe.coxautoinc.com/api/v3")
+        self.api_base_url = api_base_url or os.environ.get("GITHUB_API_URL", "https://api.github.com")
         self.headers = {
             "Authorization": f"token {token}",
             "Accept": "application/vnd.github.v3+json",
