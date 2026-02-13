@@ -106,7 +106,14 @@ class AICodeReviewer:
         try:
             # Use the new Copilot CLI with prompt mode (-p for non-interactive)
             # and silent mode (-s) to get clean output
-            cmd = [self.copilot_cmd, "-p", prompt, "-s"]
+            cmd = [
+                self.copilot_cmd,
+                "-p", prompt,
+                "--silent",  # Only output the response
+                "--allow-all-tools",  # Allow code analysis
+                "--model", "gpt-4.1",  # Use GPT-4 for better analysis
+                "--no-color"  # Disable color for easier parsing
+            ]
             
             result = subprocess.run(
                 cmd,
