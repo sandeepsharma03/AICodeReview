@@ -106,18 +106,14 @@ class AICodeReviewer:
         try:
             # Use the new Copilot CLI with prompt mode (-p for non-interactive)
             # and silent mode (-s) to get clean output
-            cmd = [
-                self.copilot_cmd,
-                "-p", prompt,
-                "--silent",  # Only output the response
-            ]
+            cmd = [self.copilot_cmd, "-p", prompt, "-s"]
             
             result = subprocess.run(
                 cmd,
                 capture_output=True,
                 text=True,
                 encoding='utf-8',
-                errors='replace',
+                check=True,
                 timeout=120,  # Increased timeout for AI processing
                 env= os.environ
             )
