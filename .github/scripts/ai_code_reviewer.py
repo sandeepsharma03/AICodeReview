@@ -109,7 +109,7 @@ class AICodeReviewer:
             cmd = [
                 self.copilot_cmd,
                 "-p", prompt,
-                "--silent",  # Only output the response
+                "--log-level=all"
                 "--allow-all-tools",  # Allow code analysis
                 "--model", "gpt-4.1",  # Use GPT-4 for better analysis
                 "--no-color"  # Disable color for easier parsing
@@ -120,7 +120,7 @@ class AICodeReviewer:
                 capture_output=True,
                 text=True,
                 encoding='utf-8',
-                check=True,
+                errors='replace',
                 timeout=120,  # Increased timeout for AI processing
                 env= os.environ
             )
