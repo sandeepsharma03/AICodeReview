@@ -110,9 +110,6 @@ class AICodeReviewer:
                 self.copilot_cmd,
                 "-p", prompt,
                 "--silent",  # Only output the response
-                "--allow-all-tools",  # Allow code analysis
-                "--model", "gpt-4.1",  # Use GPT-4 for better analysis
-                "--no-color"  # Disable color for easier parsing
             ]
             
             result = subprocess.run(
@@ -128,8 +125,6 @@ class AICodeReviewer:
             # Check for errors
             if result.returncode != 0:
                 print(f"    ⚠️  Copilot CLI error (exit code {result.returncode})")
-                print(f"    ⚠️  Copilot CLI error (exit message {result.stderr})")
-                print(f"    ⚠️  Copilot CLI error (exit output {result.stdout})")
                 if result.stderr:
                     # Sanitize error message - avoid printing full errors that may contain tokens/paths
                     stderr_preview = result.stderr[:100].split('\n')[0]  # Only first line, truncated
