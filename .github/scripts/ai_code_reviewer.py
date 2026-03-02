@@ -421,6 +421,9 @@ class AICodeReviewer:
         # Split response into lines and look for issue patterns
         lines = response.split('\n')
         
+        # Check if line number extraction is enabled
+        extract_line_numbers = self.config.get("review_settings", {}).get("parsing", {}).get("extract_line_numbers", True)
+        
         current_finding = None
         for line in lines:
             line = line.strip()
@@ -444,11 +447,12 @@ class AICodeReviewer:
                     'code_example': None
                 }
             
+            if extract_line_numbers:
             # Extract line numbers
-            line_match = re.search(r'\bline\s+(\d+)\b', line, re.IGNORECASE)
-            if line_match and current_finding:
-                current_finding['line_number'] = int(line_match.group(1))
-            
+                line_match = re.search(r'\bline\s+(\d+)\b', line, re.IGNORECASE)
+                if line_match and current_finding:
+                    current_finding['line_number'] = int(line_match.group(1))
+                
             # Extract category
             category_match = re.search(r'\b(security|performance|code_quality|best_practices|maintainability)\b', line, re.IGNORECASE)
             if category_match and current_finding:
