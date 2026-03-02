@@ -92,3 +92,7 @@ integration:
   create_review_thread: false
   update_pr_status: false
   notify_codeowners: false
+
+review_settings:
+  parsing:
+    extract_line_numbers: false  # Set to true to enable line number extraction for more precise feedback
